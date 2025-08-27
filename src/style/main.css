@@ -16,8 +16,8 @@
 
 /* grid */
 .poke-dex-list {
-  @apply p-4 gap-4;
-  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5;
+  @apply p-4 gap-2 xs:gap-4;
+  @apply grid grid-cols-1 xxs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5;
 }
 
 .poke-dex-list__search {
@@ -126,6 +126,7 @@
 
 /* poke card */
 .poke-card {
+  @apply py-4 h-full;
   @apply shadow-lg cursor-pointer;
   @apply hover:border-blue-400 hover:scale-105;
   @apply transition-all duration-300 will-change-transform;
@@ -137,11 +138,11 @@
 
 .poke-card-header__title {
   @apply mt-2;
-  @apply text-xl font-semibold text-center;
+  @apply text-base xs:text-xl font-semibold text-center;
 }
 
 .poke-card-header__eng {
-  @apply text-sm font-normal text-gray-500 capitalize;
+  @apply text-xs xs:text-sm font-normal text-gray-500 capitalize;
 }
 
 .poke-card-id {

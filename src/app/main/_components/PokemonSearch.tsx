@@ -130,7 +130,6 @@ export const PokemonSearch = ({
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 className="flex-1"
-                autoFocus
               />
               <Button variant="ghost" onClick={handleSearch} className="w-fit">
                 <Search />

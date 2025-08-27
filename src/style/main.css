@@ -1,0 +1,160 @@
+@import "./util/tailwind.config.css";
+
+/* poke(main) */
+.poke-dex {
+  @apply flex-1;
+  @apply p-0 mt-16;
+  @apply relative z-10;
+  @apply flex flex-col;
+  @apply overflow-auto;
+}
+
+.poke-dex-layout {
+  @apply my-4;
+  @apply flex flex-col;
+}
+
+/* grid */
+.poke-dex-list {
+  @apply p-4 gap-4;
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5;
+}
+
+.poke-dex-list__search {
+  @apply gap-2;
+  @apply col-span-full flex flex-col items-center;
+}
+
+/* list up */
+.poke-dex-up,
+.poke-dex-search {
+  @apply w-12 h-12;
+  @apply rounded-full;
+  @apply absolute z-10 bottom-18 right-6;
+}
+
+/* search drawer */
+.poke-dex-search {
+  @apply bottom-4;
+}
+
+.poke-dex-filter {
+  @apply p-4;
+  @apply border-0;
+  @apply rounded-t-4xl;
+  @apply flex flex-col;
+  @apply overflow-hidden;
+  @apply bg-primary max-w-content mx-auto w-full;
+}
+
+.poke-dex-filter__header {
+  @apply p-0 my-4;
+  @apply flex flex-row items-center justify-between;
+  @apply text-2xl text-left;
+}
+
+.poke-dex-filter__header h2 {
+  @apply text-gray-200;
+}
+.poke-dex-filter__search {
+  @apply p-0 mb-14;
+  @apply overflow-hidden;
+  @apply flex flex-col gap-2;
+}
+
+.poke-dex-filter__input {
+  @apply w-full;
+  @apply relative;
+  @apply flex gap-2;
+}
+
+.poke-dex-filter__input input {
+  @apply flex-1;
+  @apply text-lg;
+  @apply h-12 pr-10;
+  @apply bg-white;
+}
+
+.poke-dex-filter__input button {
+  @apply h-12;
+}
+
+.poke-dex-filter__input input + button {
+  @apply border-0;
+  @apply absolute right-0;
+}
+.poke-dex-filter__box {
+  @apply space-y-4;
+  @apply flex flex-col;
+  @apply mt-8;
+  @apply overflow-auto;
+}
+
+.poke-dex-filter__title {
+  @apply w-full pb-1;
+  @apply text-gray-300;
+  @apply flex items-center;
+  @apply border-b border-dashed border-gray-500;
+}
+
+.poke-dex-filter__group {
+  @apply flex flex-wrap gap-2;
+}
+
+.poke-dex-filter__checkbox {
+  @apply contents;
+}
+.poke-dex-filter__checkbox button {
+  @apply hidden;
+}
+.poke-dex-filter__checkbox label {
+  @apply transition;
+  @apply bg-white/10 hover:bg-white/20;
+  @apply border border-gray-400;
+  @apply text-gray-400 hover:text-white;
+  @apply w-14 h-7;
+  @apply flex justify-center items-center text-sm;
+  @apply cursor-pointer;
+  @apply rounded-sm;
+}
+
+.poke-dex-filter__checkbox button[data-state="checked"] + label {
+  @apply bg-white;
+  @apply border-white;
+  @apply text-primary;
+}
+
+/* poke card */
+.poke-card {
+  @apply shadow-lg cursor-pointer;
+  @apply hover:border-blue-400 hover:scale-105;
+  @apply transition-all duration-300 will-change-transform;
+}
+
+.poke-card-header {
+  @apply flex flex-col items-center;
+}
+
+.poke-card-header__title {
+  @apply mt-2;
+  @apply text-xl font-semibold text-center;
+}
+
+.poke-card-header__eng {
+  @apply text-sm font-normal text-gray-500 capitalize;
+}
+
+.poke-card-id {
+  @apply text-center text-gray-500 mb-2;
+}
+
+.poke-card-types {
+  @apply flex justify-center gap-1 flex-wrap;
+}
+
+.poke-card-types span {
+  @apply text-xs;
+  @apply px-2 py-1;
+  @apply rounded-full;
+  @apply text-gray-100 bg-gray-500;
+}

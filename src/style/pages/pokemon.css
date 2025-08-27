@@ -1,0 +1,162 @@
+@import "../util/tailwind.config.css";
+/* scroll Area */
+.poke-details-scroll {
+  @apply bg-white;
+  @apply border border-gray-200;
+  @apply rounded-2xl overflow-auto;
+  @apply w-full max-w-4xl mx-auto mt-20 mb-4;
+}
+
+.poke-details-scroll > div[data-radix-scroll-area-viewport] > div {
+  display: flex !important;
+}
+
+/* details */
+.poke-details {
+  @apply w-full overflow-hidden;
+  @apply bg-transparent border-0 rounded-none;
+}
+
+.poke-details-image {
+  @apply mx-auto mb-8;
+}
+
+.poke-details-title {
+  @apply mt-4 gap-1 md:gap-2;
+  @apply flex justify-center items-center flex-col md:flex-row;
+}
+
+.poke-details-title__ko {
+  @apply flex gap-2;
+  @apply text-2xl md:text-3xl font-bold;
+}
+.poke-details-title__ko span {
+  @apply text-rose-400;
+}
+
+.poke-details-title__en {
+  @apply text-gray-500 text-base md:text-xl;
+}
+
+.poke-details-content {
+  @apply space-y-8;
+}
+
+/* details gallery */
+.poke-details-gallery {
+  @apply flex gap-4 pb-2;
+}
+
+.poke-details-gallery__scroll {
+  @apply w-full overflow-x-auto pb-2;
+}
+
+.poke-details-gallery__card {
+  @apply w-full p-4 gap-0;
+  @apply hover:border-blue-400;
+  @apply shadow-sm cursor-pointer;
+  @apply flex justify-center items-center;
+  @apply transition-all duration-300 will-change-transform;
+}
+
+.poke-details-gallery__card img {
+  @apply min-w-[76px] max-w-full;
+}
+
+.poke-details-dialog {
+  @apply will-change-transform;
+  @apply max-w-lg w-[calc(100%-2rem)];
+}
+
+.poke-details-dialog button {
+  @apply cursor-pointer;
+}
+
+.poke-details-dialog__name {
+  @apply text-center text-gray-600 capitalize;
+}
+
+.poke-details-dialog__img {
+  @apply relative overflow-hidden;
+  @apply h-0 w-full mx-auto pb-[100%];
+  @apply flex justify-center items-center;
+}
+
+.poke-details-dialog__img img {
+  @apply object-contain;
+}
+
+/* info */
+.poke-info {
+  @apply gap-4 -mt-4;
+  @apply grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-4;
+}
+
+.poke-info-box {
+  @apply border;
+  @apply rounded-md overflow-hidden;
+}
+.poke-info-box__title {
+  @apply bg-primary;
+  @apply text-white text-center py-1;
+}
+
+.poke-info-box__value {
+  @apply p-2 gap-1 text-lg;
+  @apply flex flex-wrap items-center justify-center;
+}
+
+.poke-info-box__label {
+  @apply px-2 py-1 rounded-sm text-base font-medium shadow-sm;
+}
+
+.poke-info-stats {
+  @apply flex flex-col;
+}
+
+.poke-info-stats__item {
+  @apply gap-2 sm:gap-4 p-4;
+  @apply border-b;
+  @apply flex items-center justify-between flex-wrap sm:flex-nowrap;
+}
+
+.poke-info-stats__item span {
+  @apply flex-none w-auto sm:w-24 sm:order-[0] order-[-1];
+}
+
+/* evolution */
+.poke-evolution {
+  @apply w-full min-h-40;
+  @apply border border-gray-200;
+  @apply flex justify-center items-center p-6 bg-gray-100 rounded-lg overflow-hidden;
+}
+
+.poke-evolution-list {
+  @apply flex items-start gap-8;
+}
+
+.poke-evolution-list__sub {
+  @apply relative;
+  @apply flex  justify-center gap-8;
+}
+
+.poke-evolution-list__sub .poke-details-gallery__card {
+  @apply relative;
+}
+
+.poke-evolution-list__sub .poke-details-gallery__card::before {
+  content: "";
+  @apply w-4 h-1 bg-gray-300;
+  @apply absolute top-1/2 translate-y-1/2 -left-6;
+}
+
+.poke-evolution-list__sub--multiple-branches {
+  @apply relative;
+  @apply flex-col gap-4;
+}
+
+.poke-evolution-list__sub--multiple-branches::before {
+  content: "";
+  @apply absolute -left-6 top-[69px];
+  @apply w-1 h-[calc(100%-130px)] bg-gray-300;
+}

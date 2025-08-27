@@ -1,0 +1,55 @@
+@import "./util/tailwind.config.css";
+@import "./util/variant.css";
+
+@font-face {
+  font-family: "DungGeunMo";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+html,
+body {
+  font-family: "DungGeunMo";
+  @apply w-full h-full;
+  @apply overflow-hidden;
+}
+
+body {
+  @apply bg-white;
+  @apply flex flex-col;
+}
+
+/* layout */
+.container {
+  @apply p-4 max-w-content mx-auto;
+}
+
+/* header */
+.header {
+  @apply w-full max-w-content bg-primary text-gray-300;
+  @apply fixed z-90 top-0 left-1/2 -translate-x-1/2;
+  @apply rounded-b-2xl;
+}
+
+.header .container {
+  @apply flex items-center justify-between;
+}
+
+.header-title {
+  @apply mr-20;
+  @apply text-3xl font-bold;
+}
+
+.header-list {
+  @apply flex-1;
+}
+
+/* main */
+.main {
+  @apply max-w-content mx-auto w-full;
+  @apply bg-gray-100;
+  @apply flex-1;
+  @apply min-h-dvh;
+  @apply flex flex-col;
+}

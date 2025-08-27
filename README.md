@@ -6,7 +6,7 @@
 
 [https://maro-poke.vercel.app](https://maro-poke.vercel.app)
 
-### 주요기능
+## 주요기능
 
 1. 포켓몬 목록 및 검색
 
@@ -19,16 +19,16 @@
    - 스프라이트 이미지 갤러리
    - 진화 트리 표시
 
-### 기술 스택
+## 기술 스택
 
 - React, Next.js
 - Shadcn/ui + tailwind CSS
 
-### 데이터 소스
+## 데이터 소스
 
 - [PokeAPI](pokeapi.co)
 
-### 설치 및 실행
+## 설치 및 실행
 
 ```bash
 git clone <repository-url>

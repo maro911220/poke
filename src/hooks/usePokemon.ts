@@ -50,12 +50,16 @@ const fetchPokemonBatch = async (
           name,
           koreanName:
             species?.names?.find(
-              (n: any) => n.language.name === POKEMON_CONFIG.KOREAN_LANG_CODE
+              (n: { name: string; language: { name: string } }) =>
+                n.language.name === POKEMON_CONFIG.KOREAN_LANG_CODE
             )?.name || formatName(name),
           image: getPokemonImageUrl(id),
           id,
           generation: determinePokemonGeneration(id),
-          types: pokemon?.types?.map((t: any) => t.type.name) || [],
+          types:
+            pokemon?.types?.map(
+              (t: { type: { name: string; url: string } }) => t.type.name
+            ) || [],
         };
       } catch {
         return {

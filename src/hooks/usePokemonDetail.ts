@@ -99,8 +99,10 @@ const loadEvolutionData = async (
         speciesRes.json(),
       ]);
 
-      const koreanName =
-        species.names.find((n: any) => n.language.name === "ko")?.name || name;
+      const koreanName = species.names.find(
+        (n: { name: string; language: { name: string } }) =>
+          n.language.name === "ko"
+      )?.name;
       const imageUrl = getImageUrl(String(pokemon.id));
 
       return {

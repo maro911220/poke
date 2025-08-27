@@ -105,6 +105,7 @@ const useCache = (key: string) => ({
 export const usePokemon = () => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [fullLoading, setFullLooading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const cache = useCache(POKEMON_CONFIG.STORAGE_KEY);
 
@@ -116,10 +117,11 @@ export const usePokemon = () => {
         if (cached?.length) {
           setPokemonList(cached);
           setIsLoading(false);
-          return;
+          return fullLoading;
         }
 
         // 전체 목록 가져오기
+        setFullLooading(true);
         const totalCount = Object.values(GENERATION_ENDPOINTS).reduce(
           (sum, gen) => sum + gen.limit,
           0
@@ -159,5 +161,5 @@ export const usePokemon = () => {
     [pokemonList]
   );
 
-  return { pokemonList, isLoading, error, availableTypes };
+  return { pokemonList, isLoading, fullLoading, error, availableTypes };
 };

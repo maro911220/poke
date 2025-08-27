@@ -104,7 +104,6 @@ function EvolutionCard({
           width={72}
           height={72}
         />
-        <p>{cardData.koreanName}</p>
       </Card>
     </Link>
   );

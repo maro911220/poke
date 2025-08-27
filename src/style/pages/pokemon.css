@@ -132,6 +132,7 @@
 }
 
 .poke-evolution-list {
+  @apply py-1;
   @apply flex items-start gap-8;
 }
 
@@ -157,6 +158,6 @@
 
 .poke-evolution-list__sub--multiple-branches::before {
   content: "";
-  @apply absolute -left-6 top-[69px];
-  @apply w-1 h-[calc(100%-130px)] bg-gray-300;
+  @apply absolute -left-6 top-[58px];
+  @apply w-1 h-[calc(100%-108px)] bg-gray-300;
 }

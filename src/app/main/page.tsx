@@ -12,7 +12,7 @@ import { PokemonSearch } from "./_components/PokemonSearch";
 // 포켓몬 목록 메인 컴포넌트
 export default function PokemonListPage() {
   const pokeDexRef = useRef<HTMLDivElement>(null);
-  const { pokemonList, isLoading, availableTypes } = usePokemon();
+  const { pokemonList, isLoading, fullLoading, availableTypes } = usePokemon();
   const [filters, setFilters] = useState({
     generations: [] as string[],
     types: [] as string[],
@@ -75,7 +75,10 @@ export default function PokemonListPage() {
 
   // 로딩
   if (isLoading) {
-    return <Loading text="포켓몬 정보를 불러오는 중..." />;
+    const text = fullLoading
+      ? "포켓몬 도감을 준비 중이에요... 잠시만 기다려주세요"
+      : "로딩 중...";
+    return <Loading text={text} />;
   }
 
   return (

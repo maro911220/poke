@@ -56,6 +56,12 @@
 .poke-dex-filter__header h2 {
   @apply text-gray-200;
 }
+
+.poke-dex-filter__header button {
+  @apply text-gray-200;
+  @apply border-0;
+}
+
 .poke-dex-filter__search {
   @apply p-0 mb-14;
   @apply overflow-hidden;

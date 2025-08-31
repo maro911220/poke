@@ -176,8 +176,8 @@ export const usePokemon = () => {
 
         if (isCancelled) return;
 
-        // 200개씩 배치 처리
-        const BATCH_SIZE = 200;
+        // 400개씩 배치 처리
+        const BATCH_SIZE = 400;
 
         for (let i = 0; i < results.length; i += BATCH_SIZE) {
           if (isCancelled) break;

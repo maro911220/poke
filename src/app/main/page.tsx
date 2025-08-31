@@ -81,8 +81,6 @@ export default function PokemonListPage() {
     return <Loading text={text} />;
   }
 
-  console.log(pokemonList.length);
-
   return (
     <ScrollArea className="container poke-dex" ref={pokeDexRef}>
       <article className="poke-dex-layout">

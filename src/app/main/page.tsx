@@ -74,12 +74,14 @@ export default function PokemonListPage() {
   }, [pokemonList, filters]);
 
   // 로딩
-  if (isLoading) {
+  if (isLoading && pokemonList.length === 0) {
     const text = fullLoading
       ? "포켓몬 도감을 준비 중이에요... 잠시만 기다려주세요"
       : "로딩 중...";
     return <Loading text={text} />;
   }
+
+  console.log(pokemonList.length);
 
   return (
     <ScrollArea className="container poke-dex" ref={pokeDexRef}>

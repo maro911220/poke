@@ -105,54 +105,112 @@ const useCache = (key: string) => ({
 export const usePokemon = () => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [fullLoading, setFullLooading] = useState(false);
+  const [fullLoading, setFullLoading] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState({
+    current: 0,
+    total: 0,
+  });
   const [error, setError] = useState<string | null>(null);
   const cache = useCache(POKEMON_CONFIG.STORAGE_KEY);
 
+  // 배치 처리 함수를 분리
+  const processBatch = async (
+    batch: Array<{ name: string; id: number }>,
+    currentProgress: number,
+    total: number
+  ) => {
+    const batchData = await fetchPokemonBatch(batch);
+
+    // 상태를 개별적으로 업데이트하고 즉시 반환
+    return new Promise<void>((resolve) => {
+      setPokemonList((prev) => {
+        const newList = [...prev, ...batchData];
+        // 캐시도 즉시 업데이트
+        if (newList.length === total) {
+          cache.save(newList);
+        }
+        return newList;
+      });
+
+      setLoadingProgress({
+        current: currentProgress + batchData.length,
+        total: total,
+      });
+
+      // 다음 프레임에서 resolve하여 렌더링이 완료된 후 진행
+      requestAnimationFrame(() => {
+        setTimeout(resolve, 10);
+      });
+    });
+  };
+
   useEffect(() => {
+    let isCancelled = false;
+
     const fetchAll = async () => {
+      if (isCancelled) return;
+
       try {
         // 캐시 체크
         const cached = cache.load();
-        if (cached?.length) {
+        if (cached?.length && !isCancelled) {
           setPokemonList(cached);
           setIsLoading(false);
-          return fullLoading;
+          return;
         }
 
+        if (isCancelled) return;
+
         // 전체 목록 가져오기
-        setFullLooading(true);
+        setFullLoading(true);
         const totalCount = Object.values(GENERATION_ENDPOINTS).reduce(
           (sum, gen) => sum + gen.limit,
           0
         );
+
+        setLoadingProgress({ current: 0, total: totalCount });
+
         const { results }: PokeApiResponse = await fetch(
           `${POKEMON_CONFIG.API_BASE_URL}/pokemon?limit=${totalCount}`
         ).then((r) => r.json());
 
-        // 50개씩 배치 처리 (안전성 )
-        const processed: Pokemon[] = [];
-        for (let i = 0; i < results.length; i += 50) {
+        if (isCancelled) return;
+
+        // 200개씩 배치 처리
+        const BATCH_SIZE = 200;
+
+        for (let i = 0; i < results.length; i += BATCH_SIZE) {
+          if (isCancelled) break;
+
           const batch = results
-            .slice(i, i + 50)
+            .slice(i, i + BATCH_SIZE)
             .map((p, idx) => ({ name: p.name, id: i + idx + 1 }));
-          const batchData = await fetchPokemonBatch(batch);
-          processed.push(...batchData);
+
+          await processBatch(batch, i, totalCount);
         }
 
-        // 업데이트, 로컬에 저장
-        setPokemonList([...processed]);
-        cache.save(processed);
+        if (!isCancelled) {
+          setFullLoading(false);
+        }
       } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "Failed to fetch Pokemon"
-        );
+        if (!isCancelled) {
+          setError(
+            err instanceof Error ? err.message : "Failed to fetch Pokemon"
+          );
+        }
       } finally {
-        setIsLoading(false);
+        if (!isCancelled) {
+          setIsLoading(false);
+        }
       }
     };
 
     fetchAll();
+
+    // cleanup function
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
   // 타입 확인 (필터에 사용)
@@ -161,5 +219,12 @@ export const usePokemon = () => {
     [pokemonList]
   );
 
-  return { pokemonList, isLoading, fullLoading, error, availableTypes };
+  return {
+    pokemonList,
+    isLoading,
+    fullLoading,
+    loadingProgress,
+    error,
+    availableTypes,
+  };
 };
